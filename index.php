@@ -61,6 +61,8 @@
     array_push($films, new Film($result[$i]['title'], $result[$i]['original_title'], $result[$i]['poster_path'], $result[$i]['overview'], $result[$i]['release_date'], $result[$i]['genre_ids']));
   }
 
+
+  // request to data base block;
   print_r($films[0]->overview);
 
   $title = $films[0]->title;
