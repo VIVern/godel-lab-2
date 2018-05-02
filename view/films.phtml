@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>lab2</title>
+
+  <link rel="stylesheet" href="./view/css/films.css">
+</head>
+<body>
+  <div class="container">
+    <div class="list">
+      <?php
+        foreach ($films as $film) {
+          print_r($film->genresList);
+      ?>
+      <div class="filmCard">
+        <h2><?php echo $film->title ?></h2>
+        <h3>(<?php echo $film->titleOriginal ?>)</h3>
+        <p><?php echo $film->poster ?></p>
+        <p><?php echo $film->overview ?></p>
+        <h4>Жанры</h4>
+        <p><?php echo $film->genresId ?></p>
+        <p><?php echo $film->releaseDate ?></p>
+      </div>
+      <?php
+        }
+      ?>
+    </div>
+  </div>
+</body>
+</html>

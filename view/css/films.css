@@ -1,0 +1,49 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: rgba(0,0,0,.58);
+}
+
+.container {
+  width: 960px;
+  margin: 100px auto;
+}
+
+.list {
+  float: left;
+  border-radius: 10px;
+  border: 2px solid rgba(246,248,251,.79);
+  width: 960px;
+  min-height: 100px;
+  padding:40px;
+}
+
+.filmCard {
+  float: left;
+  padding: 10px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 5px;
+  border: 1px solid rgba(246,248,251,.79);
+  width:450px;
+  min-height: 600px;
+  margin-top: 30px;
+  box-sizing: border-box;
+
+}
+
+
+.filmCard:nth-child(2n+1) {
+  margin-right: 40px;
+}
+
+.filmCard:nth-child(1), .filmCard:nth-child(2) {
+    margin-top: 0px;
+}
+
+ul {
+  list-style: none;
+}

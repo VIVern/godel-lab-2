@@ -1,4 +1,7 @@
 <?php
+
+  require_once 'config/config.php';
+
   $options = [
     'http' => [
       'method' => "GET",
@@ -24,7 +27,7 @@
     public $releaseDate;
     //public $runtime;                                                                  //there is no such option in json response;
     public $genresId;
-    public $genresList = [];
+    public $genres;
 
     public function __construct($param1, $param2, $param3, $param4, $param5, $param6)
     {
@@ -38,21 +41,21 @@
 
     public function getGenres($genreArray)
     {
+      $genresList = [];
       foreach ($this->genresId as $id) {
         foreach ($genreArray as $val) {
           if($val['id'] === $id) {
-            array_push($this->genresList, $val['name']);
+            array_push($genresList, $val['name']);
           }
         }
       }
+      $this->genres = implode(',',$genresList);
     }
   }
 
   // working with dara base data base;
-  function cacheData($films)
+  function cacheData($films, $db_con)
   {
-    require_once 'config/config.php';
-
     $querry = "DELETE FROM films";
 
     $req = mysqli_query($db_con,$querry);
@@ -63,7 +66,7 @@
       $poster = $film->poster;
       $overview = $film->overview;
       $realeseDate = $film->releaseDate;
-      $genre = $film->genresList;
+      $genre = $film->genres;
 
       $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal' ,'$poster' , '$overview', '$realeseDate', '$genre')";
 
@@ -80,11 +83,21 @@
         $films[$i]->getGenres($genre);
       }
 
-      cacheData($films);
+      cacheData($films, $db_con);
 
       include_once 'view/succes.html';
-    } elseif ($_POST['mod'] === 'List') {
 
+    } elseif ($_POST['mod'] === 'List') {
+      $films=[];
+
+      $querry = "SELECT * FROM films";
+      $req = mysqli_query($db_con,$querry);
+
+      while ($result = mysqli_fetch_array($req)) {
+        array_push($films, new Film($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['realeseDate'], $result['genre']));
+      }
+
+      include_once 'view/films.phtml';
     }
 
   } else {
