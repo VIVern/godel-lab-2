@@ -61,4 +61,16 @@
     array_push($films, new Film($result[$i]['title'], $result[$i]['original_title'], $result[$i]['poster_path'], $result[$i]['overview'], $result[$i]['release_date'], $result[$i]['genre_ids']));
   }
 
-  print_r($films);
+  print_r($films[0]->overview);
+
+  $title = $films[0]->title;
+  $titleOriginal = $films[0]->titleOriginal;
+  $poster = $films[0]->poster;
+  $overview = $films[0]->overview;
+  $realeseDate = $films[0]->releaseDate;
+  $gener = $films[0]->genersId;
+
+
+  $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal' ,'$poster' , '$overview', '$realeseDate', '$gener')";
+
+  $req=mysqli_query($db_con,$querry);
