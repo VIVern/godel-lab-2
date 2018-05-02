@@ -69,14 +69,24 @@
 
       $req = mysqli_query($db_con,$querry);
     }
-    echo "Date was insert";
   }
 
-  $films = [];
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['mod'] === 'Query') {
+      $films = [];
 
-  for ($i = 0; $i < count($result); $i++) {
-    array_push($films, new Film($result[$i]['title'], $result[$i]['original_title'], $result[$i]['poster_path'], $result[$i]['overview'], $result[$i]['release_date'], $result[$i]['genre_ids']));
-    $films[$i]->getGenres($genre);
+      for ($i = 0; $i < count($result); $i++) {
+        array_push($films, new Film($result[$i]['title'], $result[$i]['original_title'], $result[$i]['poster_path'], $result[$i]['overview'], $result[$i]['release_date'], $result[$i]['genre_ids']));
+        $films[$i]->getGenres($genre);
+      }
+
+      cacheData($films);
+
+      include_once 'view/succes.html';
+    } elseif ($_POST['mod'] === 'List') {
+
+    }
+
+  } else {
+    include_once 'view/mod.html';
   }
-
-  cacheData($films);
