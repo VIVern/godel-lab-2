@@ -1,7 +1,4 @@
 <?php
-
-  require_once 'config/config.php';
-
   $options = [
     'http' => [
       'method' => "GET",
@@ -25,7 +22,7 @@
     public $poster;
     public $overview;
     public $releaseDate;
-    //public $runtime; there is no such option;
+    //public $runtime;                                                                  //there is no such option in json response;
     public $genresId;
     public $genresList = [];
 
@@ -41,8 +38,6 @@
 
     public function getGenres($genreArray)
     {
-      echo "run method";
-      echo "<br>";
       foreach ($this->genresId as $id) {
         foreach ($genreArray as $val) {
           if($val['id'] === $id) {
@@ -53,6 +48,30 @@
     }
   }
 
+  // working with dara base data base;
+  function cacheData($films)
+  {
+    require_once 'config/config.php';
+
+    $querry = "DELETE FROM films";
+
+    $req = mysqli_query($db_con,$querry);
+
+    foreach ($films as $film) {
+      $title = $film->title;
+      $titleOriginal = $film->titleOriginal;
+      $poster = $film->poster;
+      $overview = $film->overview;
+      $realeseDate = $film->releaseDate;
+      $genre = $film->genresList;
+
+      $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal' ,'$poster' , '$overview', '$realeseDate', '$genre')";
+
+      $req = mysqli_query($db_con,$querry);
+    }
+    echo "Date was insert";
+  }
+
   $films = [];
 
   for ($i = 0; $i < count($result); $i++) {
@@ -60,22 +79,4 @@
     $films[$i]->getGenres($genre);
   }
 
-  print_r($films);
-
-
-  // request to data base block;
-  foreach ($films as $film) {
-    print_r($films[0]->overview);
-
-    $title = $film->title;
-    $titleOriginal = $film->titleOriginal;
-    $poster = $film->poster;
-    $overview = $film->overview;
-    $realeseDate = $film->releaseDate;
-    $genre = $film->genresList;
-
-
-    $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal' ,'$poster' , '$overview', '$realeseDate', '$genre')";
-
-    $req=mysqli_query($db_con,$querry);
-  }
+  cacheData($films);
