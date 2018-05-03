@@ -78,9 +78,21 @@
     if ($_POST['mod'] === 'Query') {
       $films = [];
 
+      if (file_exists('./uploads/') === true) {
+        foreach (glob('./uploads/*') as $file) {
+          unlink($file);
+        }
+      }
+
       for ($i = 0; $i < count($result); $i++) {
-        array_push($films, new Film($result[$i]['title'], $result[$i]['original_title'], $result[$i]['poster_path'], $result[$i]['overview'], $result[$i]['release_date'], $result[$i]['genre_ids']));
+
+        $url = 'https://image.tmdb.org/t/p/w200/' . $result[$i]['poster_path'];
+        $path = './uploads/film_'. $i .'.png';
+        file_put_contents($path, file_get_contents($url));
+
+        array_push($films, new Film($result[$i]['title'], $result[$i]['original_title'], $path, $result[$i]['overview'], $result[$i]['release_date'], $result[$i]['genre_ids']));
         $films[$i]->getGenres($genre);
+
       }
 
       cacheData($films, $db_con);
@@ -94,7 +106,7 @@
       $req = mysqli_query($db_con,$querry);
 
       while ($result = mysqli_fetch_array($req)) {
-        array_push($films, new Film($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['realeseDate'], $result['genre']));
+        array_push($films, new Film($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));
       }
 
       include_once 'view/films.phtml';
