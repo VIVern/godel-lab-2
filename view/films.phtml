@@ -11,7 +11,20 @@
 <body>
   <header>
     <div class="container">
-      <button class="admin"></button>
+      <div class="goToModPicker">
+        <p>Pick mod</p>
+      </div>
+      <div class="daysFilter">
+        <form action="index.php" method="post">
+          <select name="days">
+            <option value="7">7</option>
+            <option value="14">14</option>
+            <option value="21">21</option>
+            <option value="28">28</option>
+          </select>
+          <input type="submit" name="applyDays" value="Apply">
+        </form>
+      </div>
     </div>
   </header>
   <div class="container">
@@ -29,9 +42,9 @@
         <h3>(<?php echo $film->titleOriginal ?>)</h3>
         <img src="<?php echo $film->poster ?>" alt="">
         <p><?php echo $film->overview ?></p>
-        <h4>Жанры</h4>
-        <p><?php echo $film->genresId ?></p>
-        <p><?php echo $film->releaseDate ?></p>
+        <h3 class="genre">Жанры:</h3>
+        <p><i><?php echo $film->genresId ?></i></p>
+        <p class="date">Дата релиза: <?php echo $film->releaseDate ?></p>
       </div>
       <?php
           }
@@ -40,7 +53,7 @@
     </div>
   </div>
   <script>
-    document.querySelector('.admin').addEventListener('click',function(){
+    document.querySelector('.goToModPicker').addEventListener('click',function(){
       document.location.href = "pickMod.php";
     });
   </script>

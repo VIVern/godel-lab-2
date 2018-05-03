@@ -1,10 +1,12 @@
 *{
   padding: 0;
   margin: 0;
+  outline: none;
 }
 
+
 body {
-  background: rgba(0,0,0,.58);
+  background: rgba(76,29,209,.58);
 }
 
 .container {
@@ -12,16 +14,64 @@ body {
   margin: 0 auto;
 }
 
-button {
-  width: 100px;
-  height: 20px;
-}
-
 header {
   background: rgba(168,22,186,.74);
   position: fixed;
   height: 80px;
   width: 100%;
+}
+
+header .goToModPicker {
+  float: left;
+  height: 80px;
+  width:200px;
+  border-right: 2px solid rgb(173,173,173);
+  text-align: center;
+  line-height: 80px;
+  color: #fff;
+}
+
+header .daysFilter {
+  float: left;
+  height: 80px;
+  width:200px;
+  border-right: 2px solid rgb(173,173,173);
+  text-align: center;
+  line-height: 80px;
+  color: #fff;
+}
+
+header .daysFilter input {
+  width: 90px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid rgb(173,173,173);
+  background: transparent;
+  color: #fff;
+}
+
+header .daysFilter select {
+  width: 90px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid rgb(173,173,173);
+  background: transparent;
+  color: #fff;
+  padding-left: 30px;
+}
+
+header .daysFilter option {
+  background: rgba(88,1,98,.74);
+  padding-left: 30px;
+}
+
+
+
+
+
+header .goToModPicker:hover, header .daysFilter input:hover {
+  cursor: pointer;
+  background: rgba(88,1,98,.74);
 }
 
 .list {
@@ -45,9 +95,21 @@ header {
   min-height: 600px;
   margin-top: 30px;
   box-sizing: border-box;
-
+  background: rgba(0,0,0,.75);
+  color: #fff;
 }
 
+.filmCard img {
+  margin:20px 0;
+}
+
+.genre {
+  margin: 20px 0 5px;
+}
+
+.date {
+  margin-top: 10px;
+}
 
 .filmCard:nth-child(2n+1) {
   margin-right: 40px;

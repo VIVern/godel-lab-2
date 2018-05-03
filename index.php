@@ -26,10 +26,10 @@
   }
 
   //creating array of objects to show them on template
-  function showData($db_con)
+  function showData($db_con, $days=7)
   {
     $films=[];
-    $dayFilter= 14;
+    $dayFilter= $days;
 
     //select from database
     $querry = "SELECT * FROM films";
@@ -44,9 +44,11 @@
   if (isset($argv) === true || $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($argv) === true || $_POST['mod'] === 'Query') {
 
-      include_once 'request.php';
+      if (isset($argv) === true) {
+        echo "geting data from tmdb \n";
+      }
 
-      echo "geting data from tmdb";
+      include_once 'request.php';
 
       $films = [];
 
@@ -79,6 +81,8 @@
       }
     } elseif ($_POST['mod'] === 'List') {
       showData($db_con);
+    } elseif (isset($_POST['days']) === true) {
+      showData($db_con, $_POST['days']);
     }
   } else {
     showData($db_con);
