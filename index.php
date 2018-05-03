@@ -2,22 +2,6 @@
 
   require_once 'config/config.php';
 
-  $options = [
-    'http' => [
-      'method' => "GET",
-      'header' => 'Content-type: application/x-www-form-urlencoded'
-    ]
-  ];
-
-  $context = stream_context_create($options);
-
-  $query = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/now_playing?api_key=e3c790bdb811cade513e875f4806841d&language=ru', false, $context), true);
-  $result = $query['results'];
-
-  $query = json_decode(file_get_contents('https://api.themoviedb.org/3/genre/movie/list?api_key=e3c790bdb811cade513e875f4806841d&language=ru', false, $context), true);
-  $genre = $query['genres'];
-
-
   class Film
   {
     public $title;
@@ -76,6 +60,22 @@
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['mod'] === 'Query') {
+
+      $options = [
+        'http' => [
+          'method' => "GET",
+          'header' => 'Content-type: application/x-www-form-urlencoded'
+        ]
+      ];
+
+      $context = stream_context_create($options);
+
+      $query = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/now_playing?api_key=e3c790bdb811cade513e875f4806841d&language=ru&page=1&region=Ru', false, $context), true);
+      $result = $query['results'];
+
+      $query = json_decode(file_get_contents('https://api.themoviedb.org/3/genre/movie/list?api_key=e3c790bdb811cade513e875f4806841d&language=ru', false, $context), true);
+      $genre = $query['genres'];
+
       $films = [];
 
       if (file_exists('./uploads/') === true) {
@@ -101,17 +101,16 @@
 
     } elseif ($_POST['mod'] === 'List') {
       $films=[];
+      $dayFilter= 7;
 
       $querry = "SELECT * FROM films";
       $req = mysqli_query($db_con,$querry);
 
       while ($result = mysqli_fetch_array($req)) {
         array_push($films, new Film($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));
-      }
-
+      } 
       include_once 'view/films.phtml';
     }
-
   } else {
     include_once 'view/mod.html';
   }
