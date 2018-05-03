@@ -19,7 +19,7 @@
           $datetime2 = date_create($film->releaseDate);
           $interval = date_diff($datetime1, $datetime2);
 
-          if( $interval->m === 0 && $interval->d < $dayFilter ) {
+          if( $interval->m === 0 && $interval->d <= $dayFilter ) {
       ?>
       <div class="filmCard">
         <h2><?php echo $film->title ?></h2>
