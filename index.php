@@ -36,15 +36,17 @@
     $req = mysqli_query($db_con,$querry);
 
     while ($result = mysqli_fetch_array($req)) {
-      array_push($films, new Film($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));
+      array_push($films, new Film ($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));
     }
     include_once 'view/films.phtml';
   }
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($_POST['mod'] === 'Query') {
+  if (isset($argv) === true || $_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($argv) === true || $_POST['mod'] === 'Query') {
 
       include_once 'request.php';
+
+      echo "geting data from tmdb";
 
       $films = [];
 
@@ -55,21 +57,26 @@
         }
       }
 
+      // upload images from tmdb
       for ($i = 0; $i < count($result); $i++) {
-        $url = 'https://image.tmdb.org/t/p/w200/' . $result[$i]['poster_path'];
-        $path = './uploads/film_'. $i .'.jpg';
-        file_put_contents($path, file_get_contents($url));
+        if (isset($result[$i]['poster_path']) === true) {
+          $url = 'https://image.tmdb.org/t/p/w200/' . $result[$i]['poster_path'];
+          $path = './uploads/film_'. $i .'.jpg';
+          file_put_contents($path, file_get_contents($url));
+        }
 
-        array_push($films, new Film($result[$i]['title'], $result[$i]['original_title'], $path, $result[$i]['overview'], $result[$i]['release_date'], $result[$i]['genre_ids']));
+        array_push($films, new Film ($result[$i]['title'], $result[$i]['original_title'], $path, $result[$i]['overview'], $result[$i]['release_date'], $result[$i]['genre_ids']));
         $films[$i]->getGenres($genre);
-
       }
 
       //push to database
       cacheData($films, $db_con);
 
-      include_once 'view/succes.html';
-
+      if (isset($argv) === true) {
+        echo "data was updated succesfuly \n";
+      } else {
+        include_once 'view/succes.html';
+      }
     } elseif ($_POST['mod'] === 'List') {
       showData($db_con);
     }
