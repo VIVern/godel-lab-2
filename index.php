@@ -4,7 +4,7 @@
 
   require_once 'classes/Film.php';
 
-  // working with dara base data base;
+  // inserts data into data base;
   function cacheData($films, $db_con)
   {
     $querry = "DELETE FROM films";
@@ -23,6 +23,22 @@
 
       $req = mysqli_query($db_con,$querry);
     }
+  }
+
+  //creating array of objects to show them on template
+  function showData($db_con)
+  {
+    $films=[];
+    $dayFilter= 14;
+
+    //select from database
+    $querry = "SELECT * FROM films";
+    $req = mysqli_query($db_con,$querry);
+
+    while ($result = mysqli_fetch_array($req)) {
+      array_push($films, new Film($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));
+    }
+    include_once 'view/films.phtml';
   }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -55,18 +71,8 @@
       include_once 'view/succes.html';
 
     } elseif ($_POST['mod'] === 'List') {
-      $films=[];
-      $dayFilter= 14;
-
-      //select from database
-      $querry = "SELECT * FROM films";
-      $req = mysqli_query($db_con,$querry);
-
-      while ($result = mysqli_fetch_array($req)) {
-        array_push($films, new Film($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));
-      }
-      include_once 'view/films.phtml';
+      showData($db_con);
     }
   } else {
-    include_once 'view/mod.html';
+    showData($db_con);
   }

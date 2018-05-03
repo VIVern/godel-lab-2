@@ -9,8 +9,11 @@
   <link rel="stylesheet" href="./view/css/films.css">
 </head>
 <body>
-  <div>
-  </div>
+  <header>
+    <div class="container">
+      <button class="admin"></button>
+    </div>
+  </header>
   <div class="container">
     <div class="list">
       <?php
@@ -36,5 +39,10 @@
       ?>
     </div>
   </div>
+  <script>
+    document.querySelector('.admin').addEventListener('click',function(){
+      document.location.href = "pickMod.php";
+    });
+  </script>
 </body>
 </html>

@@ -9,7 +9,19 @@ body {
 
 .container {
   width: 960px;
-  margin: 100px auto;
+  margin: 0 auto;
+}
+
+button {
+  width: 100px;
+  height: 20px;
+}
+
+header {
+  background: rgba(168,22,186,.74);
+  position: fixed;
+  height: 80px;
+  width: 100%;
 }
 
 .list {
@@ -19,6 +31,7 @@ body {
   width: 960px;
   min-height: 100px;
   padding:40px;
+  margin:100px 0;
 }
 
 .filmCard {
