@@ -36,7 +36,8 @@
           $datetime1 = date_create();
           $datetime2 = date_create($film->releaseDate);
           $interval = date_diff($datetime1, $datetime2);
-          if( $interval->m === 0 && $interval->d <= $dayFilter ) {
+
+          if ($interval->m === 0 && $interval->d <= $dayFilter) {
             $i++;
       ?>
       <div class="filmCard">
@@ -53,7 +54,7 @@
         }
         if ($i === 0) {
       ?>
-          <p class="warning">Нет фильмов удовлеторяющих условию. Попробуйте измtнить количество дней с момента релиза или запустить Query mod.</p>
+          <p class="warning">Нет фильмов удовлеторяющих условию. Попробуйте изменить количество дней с момента релиза или запустить Query mod.</p>
       <?php
         }
       ?>

@@ -14,11 +14,12 @@
 
   $response = mysqli_query($db_con, $query);
 
-  if($response === false) {
+  if ($response === false) {
     $text = date("Y-m-d H:m:s") . " failed to create table. Check your query and connection to database.\n";
     fwrite($log, $text);
     exit('Warning: check log file for more information');
   } else {
     $text = date("Y-m-d H:m:s") . " table was created successfully\n";
     fwrite($log, $text);
+    echo "operation complite";
   }

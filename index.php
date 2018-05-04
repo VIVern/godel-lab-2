@@ -9,9 +9,9 @@
   {
     $querry = "DELETE FROM films";
 
-    $req = mysqli_query($db_con,$querry);
+    $req = mysqli_query($db_con, $querry);
 
-    if(count($films) === 0){
+    if (count($films) === 0) {
       $text = date("Y-m-d H:m:s") . " failed to get data from tmdb. Check request.php file and tmdb server status\n";
       fwrite($log, $text);
       exit('Warning: check log file for more information');
@@ -28,11 +28,11 @@
       $realeseDate = $film->releaseDate;
       $genre = $film->genres;
 
-      $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal' ,'$poster' , '$overview', '$realeseDate', '$genre')";
+      $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal', '$poster', '$overview', '$realeseDate', '$genre')";
 
-      $req = mysqli_query($db_con,$querry);
+      $req = mysqli_query($db_con, $querry);
 
-      if($req === false){
+      if ($req === false) {
         $text = date("Y-m-d H:m:s") . " failed to insert data into database. Check query in cacheData(). Chech connection to database\n";
         fwrite($log, $text);
         exit('Warning: check log file for more information');
@@ -46,12 +46,12 @@
   //creating array of objects to show them on template
   function showData($db_con, $days=7)
   {
-    $films=[];
-    $dayFilter= $days;
+    $films = [];
+    $dayFilter = $days;
 
     //select from database
     $querry = "SELECT * FROM films";
-    $req = mysqli_query($db_con,$querry);
+    $req = mysqli_query($db_con, $querry);
 
     while ($result = mysqli_fetch_array($req)) {
       array_push($films, new Film ($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));

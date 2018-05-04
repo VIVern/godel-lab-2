@@ -30,6 +30,6 @@
           }
         }
       }
-      $this->genres = implode(',',$genresList);
+      $this->genres = implode(',', $genresList);
     }
   }
