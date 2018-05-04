@@ -1,0 +1,4 @@
+2018-05-04 14:13:38 connected to database successfully
+2018-05-04 14:05:38 table was created successfully
+2018-05-04 14:13:55 connected to database successfully
+2018-05-04 14:14:04 connected to database successfully
