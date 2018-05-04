@@ -1,6 +1,8 @@
 <?php
   $log = fopen('./logs/log.txt', 'a');
 
+  $API_token = '';
+
   //подключение к базе
   $db_location = 'localhost';
   $db_user = '';
