@@ -5,11 +5,20 @@
   require_once 'classes/Film.php';
 
   // inserts data into data base;
-  function cacheData($films, $db_con)
+  function cacheData($films, $db_con, $log)
   {
     $querry = "DELETE FROM films";
 
     $req = mysqli_query($db_con,$querry);
+
+    if(count($films) === 0){
+      $text = date("Y-m-d H:m:s") . " failed to get data from tmdb. Check request.php file and tmdb server status\n";
+      fwrite($log, $text);
+      exit('Warning: check log file for more information');
+    } else {
+      $text = date("Y-m-d H:i:s") . " Data recived successfully\n";
+      fwrite($log, $text);
+    }
 
     foreach ($films as $film) {
       $title = $film->title;
@@ -22,6 +31,15 @@
       $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal' ,'$poster' , '$overview', '$realeseDate', '$genre')";
 
       $req = mysqli_query($db_con,$querry);
+
+      if($req === false){
+        $text = date("Y-m-d H:m:s") . " failed to insert data into database. Check query in cacheData(). Chech connection to database\n";
+        fwrite($log, $text);
+        exit('Warning: check log file for more information');
+      } else {
+        $text = date("Y-m-d H:i:s") . " data inserted successfully\n";
+        fwrite($log, $text);
+      }
     }
   }
 
@@ -72,7 +90,7 @@
       }
 
       //push to database
-      cacheData($films, $db_con);
+      cacheData($films, $db_con, $log);
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";
