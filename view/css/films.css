@@ -37,7 +37,6 @@ header .daysFilter {
   width:200px;
   border-right: 2px solid rgb(173,173,173);
   text-align: center;
-  line-height: 80px;
   color: #fff;
 }
 
@@ -64,10 +63,6 @@ header .daysFilter option {
   background: rgba(88,1,98,.74);
   padding-left: 30px;
 }
-
-
-
-
 
 header .goToModPicker:hover, header .daysFilter input:hover {
   cursor: pointer;
@@ -121,4 +116,10 @@ header .goToModPicker:hover, header .daysFilter input:hover {
 
 ul {
   list-style: none;
+}
+
+.warning {
+  font-size: 32px;
+  color: #fff;
+  text-align: center;
 }

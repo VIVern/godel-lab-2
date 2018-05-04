@@ -16,6 +16,7 @@
       </div>
       <div class="daysFilter">
         <form action="index.php" method="post">
+          <label class="filterText">Дней после релиза</label>
           <select name="days">
             <option value="7">7</option>
             <option value="14">14</option>
@@ -30,12 +31,13 @@
   <div class="container">
     <div class="list">
       <?php
+        $i=0;
         foreach ($films as $film) {
           $datetime1 = date_create();
           $datetime2 = date_create($film->releaseDate);
           $interval = date_diff($datetime1, $datetime2);
-
           if( $interval->m === 0 && $interval->d <= $dayFilter ) {
+            $i++;
       ?>
       <div class="filmCard">
         <h2><?php echo $film->title ?></h2>
@@ -48,6 +50,11 @@
       </div>
       <?php
           }
+        }
+        if ($i === 0) {
+      ?>
+          <p class="warning">Нет фильмов удовлеторяющих условию. Попробуйте измtнить количество дней с момента релиза или запустить Query mod.</p>
+      <?php
         }
       ?>
     </div>
