@@ -12,6 +12,7 @@
     genres TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
   )";
 
+  $db_con = mysqli_connect($db_location, $db_user, $db_pass, $db_name);
   $response = mysqli_query($db_con, $query);
 
   if ($response === false) {
