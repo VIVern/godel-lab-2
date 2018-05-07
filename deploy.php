@@ -1,5 +1,5 @@
 <?php
-  require_once './config/config.php';
+  // require_once './config/config.php';
   $log = fopen('logs/log.txt', 'a');
 
   $query = "CREATE TABLE films (
