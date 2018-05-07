@@ -6,7 +6,7 @@
     public $db_pass = '123';
     public $db_name = 'lab2';
 
-    public $db_con;
+    protected $db_con;
 
     function __construct($db_location, $db_user, $db_pass, $db_name)
     {
@@ -14,9 +14,10 @@
       $this->db_user = $db_user;
       $this->db_pass = $db_pass;
       $this->db_name = $db_name;
+      $this->connectToDatabase();
     }
 
-    function connectToDatabase()
+    private function connectToDatabase()
     {
       $log = fopen('./logs/log.txt', 'a');
 
