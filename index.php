@@ -1,11 +1,10 @@
 <?php
 
-  // require_once 'config/config.php';
-
+  require_once 'config/config.php';
   require_once 'classes/Film.php';
   require_once 'classes/DataActions.php';
 
-  $app = new DataActions('localhost', 'root', '123', 'lab2');
+  $app = new DataActions($db_location, $db_user, $db_pass, $db_name);
   $app->connectToDatabase();
 
   if (isset($argv) === true || $_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -39,7 +38,7 @@
       }
 
       //push to database
-      cacheData($films, $db_con, $log);
+      $app->cacheData($films);
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";

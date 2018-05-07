@@ -3,11 +3,11 @@
 
   class DataActions extends Database
   {
-    function cacheData($films, $db_con, $log)
+    function cacheData($films)
     {
+      $log = fopen('./logs/log.txt', 'a');
       $querry = "DELETE FROM films";
-
-      $req = mysqli_query($db_con, $querry);
+      $req = mysqli_query($this->db_con, $querry);
 
       if (count($films) === 0) {
         $text = date("Y-m-d H:m:s") . " failed to get data from tmdb. Check request.php file and tmdb server status\n";
@@ -28,7 +28,7 @@
 
         $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal', '$poster', '$overview', '$realeseDate', '$genre')";
 
-        $req = mysqli_query($db_con, $querry);
+        $req = mysqli_query($this->db_con, $querry);
 
         if ($req === false) {
           $text = date("Y-m-d H:m:s") . " failed to insert data into database. Check query in cacheData(). Chech connection to database\n";
