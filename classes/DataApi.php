@@ -3,7 +3,7 @@
   {
     protected $response;
     protected $genre;
-    protected $films;
+    public $films=[];
 
     public function getData()
     {
@@ -16,6 +16,7 @@
       $context = stream_context_create($options);
       $this->getFilms($context);
       $this->getGenre($context);
+      $this->parseFilms();
     }
 
     protected function getFilms($context)
@@ -32,7 +33,7 @@
 
       $this->response = $result;
     }
-    protected function getGenre()
+    protected function getGenre($context)
     {
       $query = json_decode(file_get_contents('https://api.themoviedb.org/3/genre/movie/list?api_key=e3c790bdb811cade513e875f4806841d&language=ru', false, $context), true);
       $this->genre = $query['genres'];
@@ -40,6 +41,12 @@
 
     protected function parseFilms()
     {
+      if (file_exists('./uploads/') === true) {
+        foreach (glob('./uploads/*') as $file) {
+          unlink($file);
+        }
+      }
+
       for ($i = 0; $i < count($this->response); $i++) {
         array_push($this->films, new Film ($this->response[$i]['title'], $this->response[$i]['original_title'], $this->response[$i]['poster_path'], $this->response[$i]['overview'], $this->response[$i]['release_date'], $this->response[$i]['genre_ids']));
         $this->films[$i]->getGenres($this->genre);

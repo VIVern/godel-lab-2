@@ -18,10 +18,11 @@
       }
 
       // gettin data from tmdb
-      $app->db->getNewData();
+      $app->api->getData();
+      print_r($app->api->films);
 
       //push to database
-      $app->db->setData();
+      $app->db->setData($app->api->films);
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";
