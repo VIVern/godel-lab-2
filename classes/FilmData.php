@@ -7,19 +7,22 @@
   {
     public $films=[];
 
-    public function setData($data)
+    public function setData($data, $table)
     {
-      $this->removeData();
+      $this->removeData($table);
 
       foreach ($data as $film) {
-        $title = $film->title;
-        $titleOriginal = $film->titleOriginal;
-        $poster = $film->poster;
-        $overview = $film->overview;
-        $realeseDate = $film->releaseDate;
-        $genre = $film->genres;
-
-        $querry = "INSERT INTO films VALUES( NULL, '$title', '$titleOriginal', '$poster', '$overview', '$realeseDate', '$genre')";
+        $vars = get_object_vars($film);
+        $values="( NULL";
+        foreach ($vars as $var => $value)
+        {
+          if ($value !== NULL) {
+            $values .= " ,'" . $value ."'";
+          }
+        }
+        $querry = "INSERT INTO " . $table . " VALUES " . $values .  ")";
+        echo $querry;
+        echo "<hr>";
         $req = mysqli_query($this->db_con, $querry);
       }
     }
@@ -35,9 +38,9 @@
       }
     }
 
-    public function removeData()
+    public function removeData($table)
     {
-      $querry = "DELETE FROM films";
+      $querry = "DELETE FROM " . $table;
       $req = mysqli_query($this->db_con, $querry);
     }
 

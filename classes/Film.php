@@ -7,7 +7,6 @@
     public $overview;
     public $releaseDate;
     //public $runtime;                                                                  //there is no such option in json response;
-    public $genresId;
     public $genres;
 
     public function __construct($param1, $param2, $param3, $param4, $param5, $param6)
@@ -17,13 +16,13 @@
       $this->poster = $param3;
       $this->overview = $param4;
       $this->releaseDate = $param5;
-      $this->genresId = $param6;
+      $this->genres = $param6;
     }
 
     public function getGenres($genreArray)
     {
       $genresList = [];
-      foreach ($this->genresId as $id) {
+      foreach ($this->genres as $id) {
         foreach ($genreArray as $val) {
           if($val['id'] === $id) {
             array_push($genresList, $val['name']);

@@ -20,7 +20,7 @@
       $app->request->getData();
 
       //push to database
-      $app->db->setData($app->request->films);
+      $app->db->setData($app->request->films, 'films');
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";
