@@ -27,15 +27,18 @@
       }
     }
 
-    public function getData()
+    public function getData($table)
     {
       //select from database
-      $querry = "SELECT * FROM films";
+      $querry = "SELECT * FROM " . $table;
       $req = mysqli_query($this->db_con, $querry);
 
+      $responseData=[];
       while ($result = mysqli_fetch_array($req)) {
         array_push($this->films, new Film ($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));
+        array_push($responseData, $result);
       }
+      print_r($responseData);
     }
 
     public function removeData($table)

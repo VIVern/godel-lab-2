@@ -29,15 +29,15 @@
       }
     } elseif (isset($_POST['mod']) === true && $_POST['mod'] === 'List') {
       // show data with default filter (7days)
-      $app->db->getData();
+      $app->db->getData('films');
       $app->view->showData($app->db->films,'./view/films.phtml');
     } elseif (isset($_POST['days']) === true) {
       // show data with new days filter value
-      $app->db->getData();
+      $app->db->getData('films');
       $app->view->showData($app->db->films,'./view/films.phtml',$_POST['days']);
     }
   } else {
     // defualt showing;
-    $app->db->getData();
+    $app->db->getData('films');
     $app->view->showData($app->db->films,'./view/films.phtml');
   }
