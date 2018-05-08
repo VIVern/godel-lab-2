@@ -41,8 +41,6 @@
           }
         }
         $querry = "INSERT INTO " . $table . " VALUES " . $values .  ")";
-        echo $querry;
-        echo "<hr>";
         $req = mysqli_query($this->db_con, $querry);
       }
     }

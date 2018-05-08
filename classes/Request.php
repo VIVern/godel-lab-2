@@ -27,11 +27,11 @@
       $countPages = $query['total_pages'];
       $result = $query['results'];
 
-      for ($i = 2; $i <= $countPages; $i++) {
-        $query = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/now_playing?api_key=e3c790bdb811cade513e875f4806841d&language=ru&page=' . $i . '&region=Ru', false, $context), true);
-        $page = $query['results'];
-        $result = array_merge($result, $page);
-      }
+      // for ($i = 2; $i <= $countPages; $i++) {
+      //   $query = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/now_playing?api_key=e3c790bdb811cade513e875f4806841d&language=ru&page=' . $i . '&region=Ru', false, $context), true);
+      //   $page = $query['results'];
+      //   $result = array_merge($result, $page);
+      // }
 
       $this->response = $result;
     }
@@ -51,7 +51,7 @@
 
       for ($i = 0; $i < count($this->response); $i++) {
         array_push($this->films, new Film ($this->response[$i]['title'], $this->response[$i]['original_title'], $this->response[$i]['poster_path'], $this->response[$i]['overview'], $this->response[$i]['release_date'], $this->response[$i]['genre_ids']));
-        $this->films[$i]->getGenres($this->genre);
+        $this->films[$i]->setGenres($this->genre);
         $this->films[$i]->getPoster($i);
       }
     }

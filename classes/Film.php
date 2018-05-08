@@ -19,7 +19,7 @@
       $this->genres = $param6;
     }
 
-    public function getGenres($genreArray)
+    public function setGenres($genreArray)
     {
       $genresList = [];
       foreach ($this->genres as $id) {
