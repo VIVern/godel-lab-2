@@ -3,11 +3,11 @@
 
   class Mysql extends Database
   {
-    private $db_location = 'localhost';
-    private $db_user = 'user';
-    private $db_pass = '123';
-    private $db_name = 'test';
-    private $API_token = '123';
+    private $db_location = '';
+    private $db_user = '';
+    private $db_pass = '';
+    private $db_name = '';
+    private $API_token = '';
     protected $db_con;
 
     function __construct($db_location, $db_user, $db_pass, $db_name, $API_token)

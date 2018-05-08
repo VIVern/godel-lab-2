@@ -1,7 +1,7 @@
 <?php
   interface DataActions
   {
-    public function setData($data);
+    public function setData();
     public function getData();
     public function removeData();
     public function updateData();

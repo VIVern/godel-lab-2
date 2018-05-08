@@ -32,4 +32,14 @@
       }
       $this->genres = implode(',', $genresList);
     }
+
+    public function getPoster($name)
+    {
+      if (isset($this->poster) === true) {
+        $url = 'https://image.tmdb.org/t/p/w200/' . $this->poster;
+        $path = './uploads/film_'. $name .'.jpg';
+        file_put_contents($path, file_get_contents($url));
+        $this->poster = $path;
+    }
   }
+}
