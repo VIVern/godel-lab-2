@@ -5,7 +5,7 @@
 
   class FilmData extends Mysql implements DataActions
   {
-    protected $films=[];
+    public $films=[];
 
     public function setData($data)
     {
@@ -24,10 +24,8 @@
       }
     }
 
-    public function getData($days=7)
+    public function getData()
     {
-      $dayFilter = $days;
-
       //select from database
       $querry = "SELECT * FROM films";
       $req = mysqli_query($this->db_con, $querry);
@@ -35,7 +33,6 @@
       while ($result = mysqli_fetch_array($req)) {
         array_push($this->films, new Film ($result['title'], $result['titleOriginal'], $result['poster'], $result['overview'], $result['releaseDate'], $result['genres']));
       }
-      include_once './view/films.phtml';
     }
 
     public function removeData()

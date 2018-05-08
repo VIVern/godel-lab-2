@@ -10,7 +10,7 @@
   $app->setDatabase($db_location, $db_user, $db_pass, $db_name, $API_token);
 
   if (isset($argv) === true || $_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($argv) === true || $_POST['mod'] === 'Query') {
+    if (isset($argv) === true || (isset($_POST['mod']) === true && $_POST['mod'] === 'Query')) {
 
       if (isset($argv) === true) {
         echo "geting data from tmdb \n";
@@ -27,14 +27,17 @@
       } else {
         include_once 'view/succes.html';
       }
-    } elseif ($_POST['mod'] === 'List') {
+    } elseif (isset($_POST['mod']) === true && $_POST['mod'] === 'List') {
       // show data with default filter (7days)
       $app->db->getData();
+      $app->view->showData($app->db->films,'./view/films.phtml');
     } elseif (isset($_POST['days']) === true) {
       // show data with new days filter value
-      $app->db->getData($_POST['days']);
+      $app->db->getData();
+      $app->view->showData($app->db->films,'./view/films.phtml',$_POST['days']);
     }
   } else {
     // defualt showing;
     $app->db->getData();
+    $app->view->showData($app->db->films,'./view/films.phtml');
   }

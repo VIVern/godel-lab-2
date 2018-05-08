@@ -32,7 +32,7 @@
     <div class="list">
       <?php
         $i=0;
-        foreach ($this->films as $film) {
+        foreach ($data as $film) {
           $datetime1 = date_create();
           $datetime2 = date_create($film->releaseDate);
           $interval = date_diff($datetime1, $datetime2);
