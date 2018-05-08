@@ -25,7 +25,7 @@
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";
       } else {
-        include_once 'view/succes.html';
+        $app->view->showStaticPage('./view/succes.html');
       }
     } elseif (isset($_POST['mod']) === true && $_POST['mod'] === 'List') {
       // show data with default filter (7days)

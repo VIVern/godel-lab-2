@@ -34,7 +34,7 @@
     }
 
     public function getPoster($name)
-    {    
+    {
       if (isset($this->poster) === true) {
         $url = 'https://image.tmdb.org/t/p/w200/' . $this->poster;
         $path = './uploads/film_'. $name .'.jpg';
