@@ -22,18 +22,52 @@
 
     protected function connect()
     {
-      // $log = fopen('./logs/log.txt', 'a');
-
       $this->db_con = mysqli_connect($this->db_location, $this->db_user, $this->db_pass, $this->db_name);
       mysqli_set_charset($this->db_con, 'utf8');
       return $this->db_con;
-      // if (!$this->db_con) {
-      //   $text = date("Y-m-d H:m:s") . " fail to connect to database. check config.php\n";
-      //   fwrite($log, $text);
-      //   exit('Warning: check log file for more information');
-      // } else {
-      //   $text = date("Y-m-d H:i:s") . " connected to database successfully\n";
-      //   fwrite($log, $text);
-      // }
+    }
+
+    public function setData($data, $table)
+    {
+      $this->removeData($table);
+
+      foreach ($data as $film) {
+        $vars = get_object_vars($film);
+        $values="( NULL";
+        foreach ($vars as $var => $value)
+        {
+          if ($value !== NULL) {
+            $values .= " ,'" . $value ."'";
+          }
+        }
+        $querry = "INSERT INTO " . $table . " VALUES " . $values .  ")";
+        echo $querry;
+        echo "<hr>";
+        $req = mysqli_query($this->db_con, $querry);
+      }
+    }
+
+    public function getData($table)
+    {
+      //select from database
+      $querry = "SELECT * FROM " . $table;
+      $req = mysqli_query($this->db_con, $querry);
+
+      $responseData=[];
+      while ($result = mysqli_fetch_array($req)) {
+        array_push($responseData, $result);
+      }
+      return $responseData;
+    }
+
+    public function removeData($table)
+    {
+      $querry = "DELETE FROM " . $table;
+      $req = mysqli_query($this->db_con, $querry);
+    }
+
+    public function updateData()
+    {
+      echo "";
     }
   }
