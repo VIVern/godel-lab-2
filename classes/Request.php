@@ -1,5 +1,5 @@
 <?php
-  class DataApi
+  class Request
   {
     protected $response;
     protected $genre;

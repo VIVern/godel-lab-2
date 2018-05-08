@@ -8,7 +8,6 @@
 
   $app = new App();
   $app->setDatabase($db_location, $db_user, $db_pass, $db_name, $API_token);
-  $app->setApi();
 
   if (isset($argv) === true || $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($argv) === true || $_POST['mod'] === 'Query') {
@@ -18,11 +17,10 @@
       }
 
       // gettin data from tmdb
-      $app->api->getData();
-      print_r($app->api->films);
+      $app->request->getData();
 
       //push to database
-      $app->db->setData($app->api->films);
+      $app->db->setData($app->request->films);
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";

@@ -1,11 +1,16 @@
 <?php
   include_once 'FilmData.php';
-  include_once 'DataApi.php';
+  include_once 'Request.php';
 
   class App
   {
     public $db;
-    public $api;
+    public $request;
+
+    function __construct()
+    {
+      $this->setApi();
+    }
 
     public function setDatabase($db_location, $db_user, $db_pass, $db_name, $API_token)
     {
@@ -14,6 +19,6 @@
 
     public function setApi()
     {
-      $this->api = new DataApi();
+      $this->request = new Request();
     }
   }
