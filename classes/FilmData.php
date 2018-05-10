@@ -27,11 +27,11 @@
 
     private function clearUploads()
     {
-      if (file_exists('./uploads/') === true) {
-        foreach (glob('./uploads/*') as $file) {
+      if (file_exists('./uploads/films/') === true) {
+        foreach (glob('./uploads/films/*') as $file) {
           unlink($file);
         }
-        Logger::writeMessage("Uploads folder was cleared");
+        Logger::writeMessage("Uploads/films folder was cleared");
       }
     }
   }

@@ -24,12 +24,17 @@
       //push to database
       $app->db->setData($app->film->films, 'films');
 
+      $app->request->getShows();
+      $app->show->parseShows($app->request->response,$app->request->genre);
+
+      $app->db->setData($app->show->shows, 'shows');
+
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";
       } else {
         $app->view->showStaticPage('./view/succes.html');
       }
-    } elseif (isset($_POST['mod']) === true && $_POST['mod'] === 'List') {
+    } elseif ((isset($_POST['mod']) === true && $_POST['mod'] === 'List') || isset($_POST['films']) === true) {
       // show data with default filter (7days)
       $films = $app->film->createFilmUnits($app->db->getData('films'));
       $app->view->showData($films,'./view/films.phtml');
@@ -37,10 +42,13 @@
       // show data with new days filter value
       $films = $app->film->createFilmUnits($app->db->getData('films'));
       $app->view->showData($films, './view/films.phtml', $_POST['days']);
+    } elseif (isset($_POST['shows']) === true) {
+      // showing lists of shows
+      $shows = $app->show->createShowUnits($app->db->getData('shows'));
+      $app->view->showData($shows, './view/shows.phtml');
     }
   } else {
     // defualt showing;
     $films = $app->film->createFilmUnits($app->db->getData('films'));
     $app->view->showData($films, './view/films.phtml');
-
   }

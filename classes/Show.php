@@ -1,8 +1,8 @@
 <?php
-  class Film
+  class Show
   {
-    public $title;
-    public $titleOriginal;
+    public $name;
+    public $originalName;
     public $poster;
     public $overview;
     public $releaseDate;
@@ -11,8 +11,8 @@
 
     public function __construct($param1, $param2, $param3, $param4, $param5, $param6)
     {
-      $this->title = $param1;
-      $this->titleOriginal = $param2;
+      $this->name = $param1;
+      $this->originalName = $param2;
       $this->poster = $param3;
       $this->overview = $param4;
       $this->releaseDate = $param5;
@@ -36,7 +36,7 @@
     {
       if (isset($this->poster) === true) {
         $url = 'https://image.tmdb.org/t/p/w200/' . $this->poster;
-        $path = './uploads/films/film_'. $name .'.jpg';
+        $path = './uploads/shows/show_'. $name .'.jpg';
         $poster = file_get_contents($url);
 
         if ($path === false) {

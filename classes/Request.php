@@ -52,4 +52,29 @@
         Logger::writeMessage("Data was received successfully");
       }
     }
+
+    public function getShows()
+    {
+      $options = [
+        'http' => [
+          'method' => "GET",
+          'header' => 'Content-type: application/x-www-form-urlencoded'
+        ]
+      ];
+      $context = stream_context_create($options);
+
+      $query = json_decode(file_get_contents('https://api.themoviedb.org/3/tv/popular?api_key=e3c790bdb811cade513e875f4806841d&language=ru&page=1', false, $context), true);
+      $result = $query['results'];
+
+      if (count($result) === 0) {
+        Logger::writeMessage("Failed to get data from tmdb. Check tmdb server status and request url");
+        exit("Warning: check log file for more information\n");
+      } else {
+        Logger::writeMessage("Data was received successfully");
+      }
+
+      $this->response = $result;
+
+      $this->getGenre($context);
+    }
   }
