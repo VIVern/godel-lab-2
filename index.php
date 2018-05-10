@@ -19,9 +19,10 @@
 
       // gettin data from tmdb
       $app->request->getData();
+      $app->film->parseFilms($app->request->response,$app->request->genre);
 
       //push to database
-      $app->db->setData($app->request->films, 'films');
+      $app->db->setData($app->film->films, 'films');
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";
