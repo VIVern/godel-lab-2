@@ -24,6 +24,13 @@
     {
       $this->db_con = mysqli_connect($this->db_location, $this->db_user, $this->db_pass, $this->db_name);
       mysqli_set_charset($this->db_con, 'utf8');
+
+      if ($this->db_con === false) {
+        Logger::writeMessage("Failed to connect to database. Check Mysql server status and config.php file");
+        exit("Warning: check log file for more information\n");
+      } else {
+        Logger::writeMessage("Connected to database successfully");
+      }
       return $this->db_con;
     }
 
@@ -66,6 +73,6 @@
 
     public function updateData()
     {
-      echo "";
+      throw new Exception("not implemented");
     }
   }

@@ -5,6 +5,7 @@
 
   require_once 'config/config.php';
   require_once 'classes/App.php';
+  require_once 'classes/Logger.php';
 
   $app = new App();
   $app->setDatabase($db_location, $db_user, $db_pass, $db_name, $API_token);
@@ -40,4 +41,5 @@
     // defualt showing;
     $films = $app->film->createFilmUnits($app->db->getData('films'));
     $app->view->showData($films, './view/films.phtml');
+
   }
