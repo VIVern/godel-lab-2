@@ -44,11 +44,20 @@
         foreach ($vars as $var => $value)
         {
           if ($value !== NULL) {
-            $values .= " ,'" . $value ."'";
+            $values .= ", '" . $value ."'";
+          } else {
+            $values .= ",''";
           }
         }
         $querry = "INSERT INTO " . $table . " VALUES " . $values .  ")";
         $req = mysqli_query($this->db_con, $querry);
+
+        if ($req === false) {
+          Logger::writeMessage("Failed insert data. Check querry and connection to database.");
+          Logger::writeMessage("Query: " . $querry);
+        } else {
+          Logger::writeMessage("Data was inserted successfully");
+        }
       }
     }
 
@@ -57,6 +66,13 @@
       //select from database
       $querry = "SELECT * FROM " . $table;
       $req = mysqli_query($this->db_con, $querry);
+
+      if ($req === false) {
+        Logger::writeMessage("Failed to select data from tabel. Check connection to database and table name");
+        exit("Warning: check log file for more information\n");
+      } else {
+        Logger::writeMessage("Data was selected successfully");
+      }
 
       $responseData=[];
       while ($result = mysqli_fetch_array($req)) {
@@ -69,6 +85,13 @@
     {
       $querry = "DELETE FROM " . $table;
       $req = mysqli_query($this->db_con, $querry);
+
+      if ($req === false) {
+        Logger::writeMessage("Failed to clear tabel. Check connection to database and table name");
+        exit("Warning: check log file for more information\n");
+      } else {
+        Logger::writeMessage("Table was cleared successfully");
+      }
     }
 
     public function updateData()
