@@ -37,8 +37,17 @@
       if (isset($this->poster) === true) {
         $url = 'https://image.tmdb.org/t/p/w200/' . $this->poster;
         $path = './uploads/film_'. $name .'.jpg';
-        file_put_contents($path, file_get_contents($url));
+        $poster = file_get_contents($url);
+
+        if ($path === false) {
+          Logger::writeMessage("Failed to download poster from tmdb. Check tmdb server status and request url");
+        } else {
+          Logger::writeMessage("Poster was received successfully");
+        }
+
+        file_put_contents($path, $poster);
         $this->poster = $path;
+
     }
   }
 }

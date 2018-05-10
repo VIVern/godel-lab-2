@@ -31,6 +31,7 @@
         foreach (glob('./uploads/*') as $file) {
           unlink($file);
         }
+        Logger::writeMessage("Uploads folder was cleared");
       }
     }
   }
