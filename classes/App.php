@@ -7,28 +7,30 @@
 
   class App
   {
+    protected $API_token;
     public $db;
     public $request;
     public $view;
     public $film;
     public $show;
 
-    function __construct()
+    function __construct($param1)
     {
-      $this->setRequest();
+      $this->API_token = $param1;
+      $this->setRequest($this->API_token);
       $this->setView();
       $this->setFilm();
       $this->setShow();
     }
 
-    public function setDatabase($db_location, $db_user, $db_pass, $db_name, $API_token)
+    public function setDatabase($db_location, $db_user, $db_pass, $db_name)
     {
-      $this->db = new Mysql($db_location, $db_user, $db_pass, $db_name, $API_token);
+      $this->db = new Mysql($db_location, $db_user, $db_pass, $db_name);
     }
 
-    private function setRequest()
+    private function setRequest($API_token)
     {
-      $this->request = new Request();
+      $this->request = new Request($API_token);
     }
 
     private function setView()

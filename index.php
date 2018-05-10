@@ -7,8 +7,8 @@
   require_once 'classes/App.php';
   require_once 'classes/Logger.php';
 
-  $app = new App();
-  $app->setDatabase($db_location, $db_user, $db_pass, $db_name, $API_token);
+  $app = new App($API_token);
+  $app->setDatabase($db_location, $db_user, $db_pass, $db_name);
 
   if (isset($argv) === true || $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($argv) === true || (isset($_POST['mod']) === true && $_POST['mod'] === 'Query')) {
