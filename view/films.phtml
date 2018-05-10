@@ -26,13 +26,18 @@
           <input type="submit" name="applyDays" value="Apply">
         </form>
       </div>
+      <div class="daysFilter">
+        <form action="index.php" method="post">
+          <input type="submit" name="shows" value="shows">
+        </form>
+      </div>
     </div>
   </header>
   <div class="container">
     <div class="list">
       <?php
         $i=0;
-        foreach ($films as $film) {
+        foreach ($data as $film) {
           $datetime1 = date_create();
           $datetime2 = date_create($film->releaseDate);
           $interval = date_diff($datetime1, $datetime2);
@@ -46,7 +51,7 @@
         <img src="<?php echo $film->poster ?>" alt="">
         <p><?php echo $film->overview ?></p>
         <h3 class="genre">Жанры:</h3>
-        <p><i><?php echo $film->genresId ?></i></p>
+        <p><i><?php echo $film->genres ?></i></p>
         <p class="date">Дата релиза: <?php echo $film->releaseDate ?></p>
       </div>
       <?php

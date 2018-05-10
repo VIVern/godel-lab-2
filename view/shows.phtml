@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>lab2</title>
+
+  <link rel="stylesheet" href="./view/css/films.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="goToModPicker">
+        <p>Pick mod</p>
+      </div>
+      <div class="daysFilter">
+        <form action="index.php" method="post">
+          <input type="submit" name="films" value="films">
+        </form>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="list">
+      <?php
+        foreach ($data as $show) {
+      ?>
+      <div class="filmCard">
+        <h2><?php echo $show->name ?></h2>
+        <h3>(<?php echo $show->originalName ?>)</h3>
+        <img src="<?php echo $show->poster ?>" alt="">
+        <p><?php echo $show->overview ?></p>
+        <h3 class="genre">Жанры:</h3>
+        <p><i><?php echo $show->genres ?></i></p>
+        <p class="date">Дата релиза: <?php echo $show->releaseDate ?></p>
+      </div>
+      <?php
+        }
+      ?>
+    </div>
+  </div>
+  <script>
+    document.querySelector('.goToModPicker').addEventListener('click',function(){
+      document.location.href = "pickMod.php";
+    });
+  </script>
+</body>
+</html>
