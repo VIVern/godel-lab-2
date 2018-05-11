@@ -7,8 +7,8 @@
     public $poster;
     public $overview;
     public $releaseDate;
-    //public $runtime;                                                                  //there is no such option in json response;
     public $genres;
+    public $runtime = "12";
 
     public function __construct($param1, $param2, $param3, $param4, $param5, $param6,$param7)
     {
@@ -49,7 +49,19 @@
 
         file_put_contents($path, $poster);
         $this->poster = $path;
+      }
+    }
 
+    public function getRuntime()
+    {
+      $options = [
+        'http' => [
+          'method' => "GET",
+          'header' => 'Content-type: application/x-www-form-urlencoded'
+        ]
+      ];
+      $context = stream_context_create($options);
+      $query = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/' . $this->id . '?api_key=e3c790bdb811cade513e875f4806841d&language=ru', false, $context), true);
+      $this->runtime = $query['runtime'];
     }
   }
-}
