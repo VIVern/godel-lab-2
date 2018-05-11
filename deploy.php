@@ -5,6 +5,7 @@
 
   $query = "CREATE TABLE films (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    filmId INT,
     title TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     titleOriginal TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     poster TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,

@@ -1,7 +1,7 @@
 <?php
   class Film
   {
-    protected $id;
+    public $id;
     public $title;
     public $titleOriginal;
     public $poster;
