@@ -24,7 +24,7 @@
       $genresList = [];
       foreach ($this->genres as $id) {
         foreach ($genreArray as $val) {
-          if($val['id'] === $id) {
+          if ($val['id'] === $id) {
             array_push($genresList, $val['name']);
           }
         }
@@ -36,7 +36,7 @@
     {
       if (isset($this->poster) === true) {
         $url = 'https://image.tmdb.org/t/p/w200/' . $this->poster;
-        $path = './uploads/films/film_'. $name .'.jpg';
+        $path = './uploads/films/film_' . $name . '.jpg';
         $poster = file_get_contents($url);
 
         if ($path === false) {

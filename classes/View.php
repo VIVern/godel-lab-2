@@ -1,7 +1,7 @@
 <?php
   class View
   {
-    public function showData($data=null,$template,$dayFilter=7)
+    public function showData($template, $data=null, $dayFilter=7)
     {
       include_once $template;
     }

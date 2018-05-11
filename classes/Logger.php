@@ -3,7 +3,7 @@
   {
     private static function open($path)
     {
-      $logFile = fopen($path , "a");
+      $logFile = fopen($path, "a");
       return $logFile;
     }
 
