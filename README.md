@@ -1,4 +1,4 @@
-# First Lab at Godel Technologies
+# Second Lab at Godel Technologies
 Second lab at Godel Technologies. This App shows you films that are playing on the theater in Ru region.
 
 ## Geting started

@@ -1,6 +1,6 @@
 <?php
-  include_once 'Mysql.php';
   include_once 'Request.php';
+  include_once 'Mysql.php';
   include_once 'View.php';
   include_once 'FilmData.php';
   include_once 'ShowData.php';

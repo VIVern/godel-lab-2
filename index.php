@@ -2,6 +2,7 @@
   require_once 'config/config.php';
   require_once 'classes/App.php';
   require_once 'classes/Logger.php';
+  require_once 'classes/Request.php';
 
   $app = new App($API_token);
   $app->setDatabase($db_location, $db_user, $db_pass, $db_name);

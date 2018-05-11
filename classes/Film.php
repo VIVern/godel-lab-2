@@ -1,6 +1,7 @@
 <?php
   class Film
   {
+    protected $id;
     public $title;
     public $titleOriginal;
     public $poster;
@@ -9,14 +10,15 @@
     //public $runtime;                                                                  //there is no such option in json response;
     public $genres;
 
-    public function __construct($param1, $param2, $param3, $param4, $param5, $param6)
+    public function __construct($param1, $param2, $param3, $param4, $param5, $param6,$param7)
     {
-      $this->title = $param1;
-      $this->titleOriginal = $param2;
-      $this->poster = $param3;
-      $this->overview = $param4;
-      $this->releaseDate = $param5;
-      $this->genres = $param6;
+      $this->id = $param1;
+      $this->title = $param2;
+      $this->titleOriginal = $param3;
+      $this->poster = $param4;
+      $this->overview = $param5;
+      $this->releaseDate = $param6;
+      $this->genres = $param7;
     }
 
     public function setGenres($genreArray)
