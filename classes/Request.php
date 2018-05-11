@@ -20,6 +20,7 @@
           'header' => 'Content-type: application/x-www-form-urlencoded'
         ]
       ];
+
       $context = stream_context_create($options);
       $this->getFilms($context);
       $this->getGenre($context);
@@ -67,8 +68,8 @@
           'header' => 'Content-type: application/x-www-form-urlencoded'
         ]
       ];
-      $context = stream_context_create($options);
 
+      $context = stream_context_create($options);
       $query = json_decode(file_get_contents('https://api.themoviedb.org/3/tv/popular?api_key=' . $this->API_token . '&language=ru&page=1', false, $context), true);
       $result = $query['results'];
 
@@ -80,7 +81,6 @@
       }
 
       $this->response = $result;
-
       $this->getGenre($context);
     }
   }

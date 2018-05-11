@@ -3,18 +3,18 @@
 
   class ShowData
   {
-    public $shows=[];
+    public $shows = [];
 
     public function createShowUnits($showsArray)
     {
-      $shows=[];
+      $shows = [];
       foreach ($showsArray as $show) {
         array_push($shows, new Show ($show['name'], $show['originalName'], $show['poster'], $show['overview'], $show['releaseDate'], $show['genres']));
       }
       return $shows;
     }
 
-    public function parseShows($shows,$genres)
+    public function parseShows($shows, $genres)
     {
       $this->clearUploads();
 

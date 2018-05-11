@@ -3,18 +3,18 @@
 
   class FilmData
   {
-    public $films=[];
+    public $films = [];
 
     public function createFilmUnits($filmsArray)
     {
-      $films=[];
+      $films = [];
       foreach ($filmsArray as $film) {
         array_push($films, new Film ($film['title'], $film['titleOriginal'], $film['poster'], $film['overview'], $film['releaseDate'], $film['genres']));
       }
       return $films;
     }
 
-    public function parseFilms($films,$genres)
+    public function parseFilms($films, $genres)
     {
       $this->clearUploads();
 

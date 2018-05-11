@@ -17,16 +17,14 @@
         echo "geting data from tmdb \n";
       }
 
-      // gettin data from tmdb
+      // gettin films from tmdb and pushing to data base
       $app->request->getData();
-      $app->film->parseFilms($app->request->response,$app->request->genre);
-
-      //push to database
+      $app->film->parseFilms($app->request->response, $app->request->genre);
       $app->db->setData($app->film->films, 'films');
 
+      // gettin shows from tmdb and pushing to data base
       $app->request->getShows();
-      $app->show->parseShows($app->request->response,$app->request->genre);
-
+      $app->show->parseShows($app->request->response, $app->request->genre);
       $app->db->setData($app->show->shows, 'shows');
 
       if (isset($argv) === true) {
@@ -37,18 +35,18 @@
     } elseif ((isset($_POST['mod']) === true && $_POST['mod'] === 'List') || isset($_POST['films']) === true) {
       // show data with default filter (7days)
       $films = $app->film->createFilmUnits($app->db->getData('films'));
-      $app->view->showData($films,'./view/films.phtml');
+      $app->view->showData('./view/films.phtml', $films);
     } elseif (isset($_POST['days']) === true) {
-      // show data with new days filter value
+      // show data with days filter value
       $films = $app->film->createFilmUnits($app->db->getData('films'));
-      $app->view->showData($films, './view/films.phtml', $_POST['days']);
+      $app->view->showData('./view/films.phtml', $films, $_POST['days']);
     } elseif (isset($_POST['shows']) === true) {
       // showing lists of shows
       $shows = $app->show->createShowUnits($app->db->getData('shows'));
-      $app->view->showData($shows, './view/shows.phtml');
+      $app->view->showData('./view/shows.phtml', $shows);
     }
   } else {
     // defualt showing;
     $films = $app->film->createFilmUnits($app->db->getData('films'));
-    $app->view->showData($films, './view/films.phtml');
+    $app->view->showData('./view/films.phtml', $films);
   }

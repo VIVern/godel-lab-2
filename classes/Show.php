@@ -36,7 +36,7 @@
     {
       if (isset($this->poster) === true) {
         $url = 'https://image.tmdb.org/t/p/w200/' . $this->poster;
-        $path = './uploads/shows/show_'. $name .'.jpg';
+        $path = './uploads/shows/show_' . $name . '.jpg';
         $poster = file_get_contents($url);
 
         if ($path === false) {

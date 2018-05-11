@@ -38,16 +38,15 @@
 
       foreach ($data as $film) {
         $vars = get_object_vars($film);
-        $values="( NULL";
-        foreach ($vars as $var => $value)
-        {
+        $values = "( NULL";
+        foreach ($vars as $var => $value) {
           if ($value !== NULL) {
-            $values .= ", '" . $value ."'";
+            $values .= ", '" . $value . "'";
           } else {
             $values .= ",''";
           }
         }
-        $querry = "INSERT INTO " . $table . " VALUES " . $values .  ")";
+        $querry = "INSERT INTO " . $table . " VALUES " . $values . ")";
         $req = mysqli_query($this->db_con, $querry);
 
         if ($req === false) {
@@ -72,7 +71,7 @@
         Logger::writeMessage("Data was selected successfully");
       }
 
-      $responseData=[];
+      $responseData = [];
       while ($result = mysqli_fetch_array($req)) {
         array_push($responseData, $result);
       }
