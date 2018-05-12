@@ -20,6 +20,7 @@
 
   $query = "CREATE TABLE shows (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    showId INT,
     name TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     originalName TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     poster TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,

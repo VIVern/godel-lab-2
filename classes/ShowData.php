@@ -1,5 +1,5 @@
 <?php
-  include_once 'Film.php';
+  include_once 'Unit.php';
   include_once 'Request.php';
 
   class ShowData
@@ -10,15 +10,14 @@
     {
       $shows = [];
       foreach ($showsArray as $show) {
-        array_push($films, new Film (
+        array_push($films, new Unit (
           $show['id'],
-          $show['title'],
-          $show['titleOriginal'],
+          $show['name'],
+          $show['originalName'],
           $show['poster'],
           $show['overview'],
           $show['releaseDate'],
-          $show['genres'],
-          $show['runtime']
+          $show['genres']
         ));
       }
       return $shows;
@@ -47,7 +46,7 @@
     {
       foreach ($showsArray as $show)
       {
-        array_push($this->shows, new Film(
+        array_push($this->shows, new Unit (
           $show['id'],
           $show['name'],
           $show['original_name'],

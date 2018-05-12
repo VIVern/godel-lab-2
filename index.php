@@ -18,8 +18,8 @@
       $app->db->setData($app->film->films, 'films');
 
       // gettin shows from tmdb and pushing to data base
-      // $app->show->requestShows($API_token);
-      // $app->db->setData($app->show->shows, 'shows');
+      $app->show->requestShows($API_token);
+      $app->db->setData($app->show->shows, 'shows');
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";

@@ -1,5 +1,5 @@
 <?php
-  include_once 'Film.php';
+  include_once 'Unit.php';
   include_once 'Request.php';
 
   class FilmData
@@ -10,7 +10,7 @@
     {
       $films = [];
       foreach ($filmsArray as $film) {
-        array_push($films, new Film (
+        array_push($films, new Unit (
           $film['id'],
           $film['title'],
           $film['titleOriginal'],
@@ -65,7 +65,7 @@
     {
       foreach ($filmsArray as $film)
       {
-        array_push($this->films, new Film(
+        array_push($this->films, new Unit (
           $film['id'],
           $film['title'],
           $film['original_title'],
