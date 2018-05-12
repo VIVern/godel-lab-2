@@ -10,55 +10,54 @@
     {
       $films = [];
       foreach ($filmsArray as $film) {
-        array_push($films, new Film ($film['id'], $film['title'], $film['titleOriginal'], $film['poster'], $film['overview'], $film['releaseDate'], $film['genres'], $film['runtime']));
+        array_push($films, new Film (
+          $film['id'],
+          $film['title'],
+          $film['titleOriginal'],
+          $film['poster'],
+          $film['overview'],
+          $film['releaseDate'],
+          $film['genres'],
+          $film['runtime']
+        ));
       }
       return $films;
     }
-    //
-    // public function parseFilms($films, $genres)
-    // {
-    //   $this->clearUploads();
-    //
-    //   for ($i = 0; $i < count($films); $i++) {
-    //     array_push($this->films, new Film ($films[$i]['id'], $films[$i]['title'], $films[$i]['original_title'], $films[$i]['poster_path'], $films[$i]['overview'], $films[$i]['release_date'], $films[$i]['genre_ids']));
-    //     $this->films[$i]->setGenres($genres);
-    //     $this->films[$i]->getPoster($i);
-    //     $this->films[$i]->getRuntime();
-    //   }
-    // }
-    //
-    // private function clearUploads()
-    // {
-    //   if (file_exists('./uploads/films/') === true) {
-    //     foreach (glob('./uploads/films/*') as $file) {
-    //       unlink($file);
-    //     }
-    //     Logger::writeMessage("Uploads/films folder was cleared");
-    //   }
-    // }
 
     public function requestFilms()
     {
       $options = [
         'api_key' => 'e3c790bdb811cade513e875f4806841d',
         'language' => 'ru',
-        'page' => '1'
+        'page' => '1',
+        'region' => 'Ru'
       ];
 
       $url = 'https://api.themoviedb.org/3/movie/now_playing?' . http_build_query($options);
 
       $request = new Request();
       $request->getData($url);
+      $response = $request->response['results'];
 
-      $this->parseFilmsResponse($request->response);
+      for($i = 2; $i <= $request->response['total_pages']; $i++)
+      {
+        $options = [
+          'api_key' => 'e3c790bdb811cade513e875f4806841d',
+          'language' => 'ru',
+          'region' => 'Ru',
+          'page' => $i
+        ];
+        $url = 'https://api.themoviedb.org/3/movie/now_playing?' . http_build_query($options);
+        $request->getData($url);
+        $response = array_merge($response, $request->response['results']);
+      }
+
+      $this->parseFilmsResponse($response);
       $this->requestFilmDetails($this->films);
-      var_dump($this->films);
     }
 
-    private function parseFilmsResponse($data)
+    private function parseFilmsResponse($filmsArray)
     {
-      $filmsArray = $data['results'];
-
       foreach ($filmsArray as $film)
       {
         array_push($this->films, new Film(
