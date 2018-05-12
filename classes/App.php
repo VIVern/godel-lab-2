@@ -14,7 +14,7 @@
     public $film;
     public $show;
 
-    function __construct($param1)
+    public function __construct($param1)
     {
       $this->API_token = $param1;
       $this->setRequest($this->API_token);

@@ -7,7 +7,7 @@
     public $genre;
     protected $API_token;
 
-    function __construct($param1)
+    public function __construct($param1)
     {
       $this->API_token = $param1;
     }

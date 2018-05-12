@@ -9,7 +9,7 @@
     private $db_name = '';
     protected $db_con;
 
-    function __construct($db_location, $db_user, $db_pass, $db_name)
+    public function __construct($db_location, $db_user, $db_pass, $db_name)
     {
       $this->db_location = $db_location;
       $this->db_user = $db_user;
