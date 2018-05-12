@@ -8,7 +8,6 @@
   class App
   {
     public $db;
-    public $request;
     public $view;
     public $film;
     public $show;
