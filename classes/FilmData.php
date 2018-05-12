@@ -73,6 +73,14 @@
 
     private function requestFilmDetails($filmArray)
     {
+
+      if (file_exists('./uploads/films/') === true) {
+        foreach (glob('./uploads/films/*') as $file) {
+          unlink($file);
+        }
+        //Logger::writeMessage("Uploads/shows folder was cleared");
+      }
+
       foreach ($filmArray as $film)
       {
         $options = [
@@ -89,6 +97,21 @@
         foreach ($details['genres'] as $genre)
         {
           $film->genres .=$genre['name'] . ",";
+        }
+
+        if (isset($film->poster) === true) {
+          $url = 'https://image.tmdb.org/t/p/w200/' . $film->poster;
+          $path = './uploads/films/film_' . $film->id . '.jpg';
+          $poster = file_get_contents($url);
+
+          // if ($path === false) {
+          //   Logger::writeMessage("Failed to download poster from tmdb. Check tmdb server status and request url");
+          // } else {
+          //   Logger::writeMessage("Poster was received successfully");
+          // }
+
+          file_put_contents($path, $poster);
+          $film->poster = $path;
         }
       }
     }
