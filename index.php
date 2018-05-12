@@ -14,14 +14,14 @@
       }
 
       // gettin films from tmdb and pushing to data base
-      $app->request->getData();
-      $app->film->parseFilms($app->request->response, $app->request->genre);
+      //$app->request->getData();
+      $app->film->requestFilms();
       $app->db->setData($app->film->films, 'films');
 
       // gettin shows from tmdb and pushing to data base
-      $app->request->getShows();
-      $app->show->parseShows($app->request->response, $app->request->genre);
-      $app->db->setData($app->show->shows, 'shows');
+      // $app->request->getShows();
+      // $app->show->parseShows($app->request->response, $app->request->genre);
+      // $app->db->setData($app->show->shows, 'shows');
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";

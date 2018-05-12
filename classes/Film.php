@@ -10,7 +10,7 @@
     public $genres;
     public $runtime;
 
-    public function __construct($param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8 = 0)
+    public function __construct($param1, $param2, $param3, $param4, $param5, $param6, $param7="", $param8 = 0)
     {
       $this->id = $param1;
       $this->title = $param2;
@@ -67,6 +67,6 @@
       $runtime = $query['runtime'];
 
       $this->runtime = $runtime;
-      
+
      }
   }

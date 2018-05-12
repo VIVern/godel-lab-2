@@ -1,0 +1,32 @@
+2018-05-12 22:26:30 : Connected to database successfully
+2018-05-12 22:26:30 : Data was selected successfully
+2018-05-12 22:26:34 : Connected to database successfully
+2018-05-12 22:26:34 : Data was selected successfully
+2018-05-12 23:31:15 : Connected to database successfully
+2018-05-12 23:31:16 : Connected to database successfully
+2018-05-12 23:31:16 : Table was cleared successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Failed insert data. Check querry and connection to database.
+2018-05-12 23:31:16 : Query: INSERT INTO films VALUES ( NULL, '396371', 'Большая игра', 'Molly's Game', '/kBGgyH2gspmAIqxiXq2aiivsFp8.jpg', 'Не попав в Олимпийскую сборную, Молли Блум не отчаивается и решает взять год на отдых, прежде чем поступать в юридическую школу. Девушка устраивается на работу в небольшое кафе Лос-Анджелеса, но это не приносит ей желаемого заработка, и тогда она решает открыть подпольный клуб для любителей игры в покер. Нелегальный бизнес оказывается делом очень прибыльным, а клуб становится популярным среди голливудских звезд и других влиятельных и богатых личностей. Вскоре Молли Блум становится настоящей «принцессой покера», но белая полоса сменяется черной.', '2017-12-21', 'криминал,драма,', '140')
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:16 : Data was inserted successfully
+2018-05-12 23:31:17 : Data was inserted successfully
+2018-05-12 23:31:17 : Data was inserted successfully
+2018-05-12 23:31:17 : Data was inserted successfully
+2018-05-12 23:33:42 : Connected to database successfully
+2018-05-12 23:33:42 : Data was selected successfully
+2018-05-12 23:33:47 : Connected to database successfully
+2018-05-12 23:33:47 : Data was selected successfully
