@@ -43,9 +43,7 @@
         foreach ($vars as $var => $value) {
           if ($value !== NULL) {
             $values .= ", '" . $value . "'";
-          } else {
-            $values .= ",''";
-          }
+          } 
         }
         $querry = "INSERT INTO " . $table . " VALUES " . $values . ")";
         $req = mysqli_query($this->db_con, $querry);

@@ -19,35 +19,35 @@
       $this->genres = $param6;
     }
 
-    public function setGenres($genreArray)
-    {
-      $genresList = [];
-      foreach ($this->genres as $id) {
-        foreach ($genreArray as $val) {
-          if($val['id'] === $id) {
-            array_push($genresList, $val['name']);
-          }
-        }
-      }
-      $this->genres = implode(',', $genresList);
-    }
-
-    public function getPoster($name)
-    {
-      if (isset($this->poster) === true) {
-        $url = 'https://image.tmdb.org/t/p/w200/' . $this->poster;
-        $path = './uploads/shows/show_' . $name . '.jpg';
-        $poster = file_get_contents($url);
-
-        if ($path === false) {
-          Logger::writeMessage("Failed to download poster from tmdb. Check tmdb server status and request url");
-        } else {
-          Logger::writeMessage("Poster was received successfully");
-        }
-
-        file_put_contents($path, $poster);
-        $this->poster = $path;
-
-    }
-  }
+  //   public function setGenres($genreArray)
+  //   {
+  //     $genresList = [];
+  //     foreach ($this->genres as $id) {
+  //       foreach ($genreArray as $val) {
+  //         if($val['id'] === $id) {
+  //           array_push($genresList, $val['name']);
+  //         }
+  //       }
+  //     }
+  //     $this->genres = implode(',', $genresList);
+  //   }
+  //
+  //   public function getPoster($name)
+  //   {
+  //     if (isset($this->poster) === true) {
+  //       $url = 'https://image.tmdb.org/t/p/w200/' . $this->poster;
+  //       $path = './uploads/shows/show_' . $name . '.jpg';
+  //       $poster = file_get_contents($url);
+  //
+  //       if ($path === false) {
+  //         Logger::writeMessage("Failed to download poster from tmdb. Check tmdb server status and request url");
+  //       } else {
+  //         Logger::writeMessage("Poster was received successfully");
+  //       }
+  //
+  //       file_put_contents($path, $poster);
+  //       $this->poster = $path;
+  //
+  //   }
+  // }
 }

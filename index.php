@@ -14,13 +14,11 @@
       }
 
       // gettin films from tmdb and pushing to data base
-      //$app->request->getData();
       $app->film->requestFilms($API_token);
       $app->db->setData($app->film->films, 'films');
 
       // gettin shows from tmdb and pushing to data base
-      // $app->request->getShows();
-      // $app->show->parseShows($app->request->response, $app->request->genre);
+      // $app->show->requestShows($API_token);
       // $app->db->setData($app->show->shows, 'shows');
 
       if (isset($argv) === true) {

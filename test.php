@@ -1,5 +1,5 @@
 <?php
-  include_once './classes/FilmData.php';
+  include_once './classes/ShowData.php';
 
-  $data = new FilmData();
-  $data->requestFilms('e3c790bdb811cade513e875f4806841d','1');
+  $data = new ShowData();
+  $data->requestShows('e3c790bdb811cade513e875f4806841d');

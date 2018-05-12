@@ -97,7 +97,11 @@
         $request = new Request();
         $request->getData($url);
         $details = $request->response;
-        $film->runtime = $details['runtime'];
+        if ($details['runtime'] !== null) {
+          $film->runtime = $details['runtime'];
+        } else {
+          $film->runtime = 0;
+        }
 
         foreach ($details['genres'] as $genre)
         {
@@ -117,6 +121,8 @@
 
           file_put_contents($path, $poster);
           $film->poster = $path;
+        } else {
+          $film->poster = "there is no poster";
         }
       }
     }
