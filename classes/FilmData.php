@@ -24,13 +24,17 @@
       return $films;
     }
 
-    public function requestFilms()
+    public function requestFilms($API_token, $pages = 0, $language = 'ru', $region = 'Ru')
     {
+      if ($pages === 0) {
+        $page = 1;
+      }
+
       $options = [
-        'api_key' => 'e3c790bdb811cade513e875f4806841d',
-        'language' => 'ru',
-        'page' => '1',
-        'region' => 'Ru'
+        'api_key' => $API_token,
+        'language' => $language,
+        'page' => $page,
+        'region' => $region
       ];
 
       $url = 'https://api.themoviedb.org/3/movie/now_playing?' . http_build_query($options);
@@ -39,19 +43,20 @@
       $request->getData($url);
       $response = $request->response['results'];
 
-      for($i = 2; $i <= $request->response['total_pages']; $i++)
-      {
-        $options = [
-          'api_key' => 'e3c790bdb811cade513e875f4806841d',
-          'language' => 'ru',
-          'region' => 'Ru',
-          'page' => $i
-        ];
-        $url = 'https://api.themoviedb.org/3/movie/now_playing?' . http_build_query($options);
-        $request->getData($url);
-        $response = array_merge($response, $request->response['results']);
+      if ( $pages === 0) {
+        for($i = 2; $i <= $request->response['total_pages']; $i++)
+        {
+          $options = [
+            'api_key' => $API_token,
+            'language' => $language,
+            'region' => $region,
+            'page' => $i
+          ];
+          $url = 'https://api.themoviedb.org/3/movie/now_playing?' . http_build_query($options);
+          $request->getData($url);
+          $response = array_merge($response, $request->response['results']);
+        }
       }
-
       $this->parseFilmsResponse($response);
       $this->requestFilmDetails($this->films);
     }

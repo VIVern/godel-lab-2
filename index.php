@@ -15,7 +15,7 @@
 
       // gettin films from tmdb and pushing to data base
       //$app->request->getData();
-      $app->film->requestFilms();
+      $app->film->requestFilms($API_token);
       $app->db->setData($app->film->films, 'films');
 
       // gettin shows from tmdb and pushing to data base

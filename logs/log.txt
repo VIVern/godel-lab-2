@@ -300,3 +300,6 @@
 2018-05-13 00:32:37 : Data was inserted successfully
 2018-05-13 00:32:37 : Data was inserted successfully
 2018-05-13 00:32:37 : Data was inserted successfully
+2018-05-13 00:38:56 : Connected to database successfully
+2018-05-13 00:38:57 : Connected to database successfully
+2018-05-13 00:38:57 : Table was cleared successfully
