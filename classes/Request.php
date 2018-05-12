@@ -1,6 +1,4 @@
 <?php
-  include_once 'Film.php';
-
   class Request
   {
     public $response;

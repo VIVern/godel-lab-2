@@ -10,7 +10,7 @@
     {
       $shows = [];
       foreach ($showsArray as $show) {
-        array_push($films, new Unit (
+        array_push($shows, new Unit (
           $show['id'],
           $show['name'],
           $show['originalName'],
@@ -39,7 +39,6 @@
 
       $this->parseShowsResponse($response);
       $this->requestShowDetails($this->shows);
-      var_dump($this->shows);
     }
 
     private function parseShowsResponse($showsArray)
