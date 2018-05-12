@@ -15,7 +15,6 @@
       $this->db_user = $db_user;
       $this->db_pass = $db_pass;
       $this->db_name = $db_name;
-      $this->connect();
     }
 
     protected function connect()
@@ -34,6 +33,8 @@
 
     public function setData($data, $table)
     {
+      $this->connect();
+
       $this->removeData($table);
 
       foreach ($data as $film) {
@@ -60,6 +61,7 @@
 
     public function getData($table)
     {
+      $this->connect();
       //select from database
       $querry = "SELECT * FROM " . $table;
       $req = mysqli_query($this->db_con, $querry);
@@ -80,6 +82,7 @@
 
     public function removeData($table)
     {
+      $this->connect();
       $querry = "DELETE FROM " . $table;
       $req = mysqli_query($this->db_con, $querry);
 

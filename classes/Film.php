@@ -7,10 +7,10 @@
     public $poster;
     public $overview;
     public $releaseDate;
-    //public $runtime;                                                                  //there is no such option in json response;
     public $genres;
+    public $runtime;
 
-    public function __construct($param1, $param2, $param3, $param4, $param5, $param6, $param7)
+    public function __construct($param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8 = 0)
     {
       $this->id = $param1;
       $this->title = $param2;
@@ -19,6 +19,7 @@
       $this->overview = $param5;
       $this->releaseDate = $param6;
       $this->genres = $param7;
+      $this->runtime = $param8;
     }
 
     public function setGenres($genreArray)
@@ -49,7 +50,23 @@
 
         file_put_contents($path, $poster);
         $this->poster = $path;
-
+      }
     }
+
+    public function getRuntime()
+    {
+      $options = [
+        'http' => [
+          'method' => "GET",
+          'header' => 'Content-type: application/x-www-form-urlencoded'
+        ]
+      ];
+      $context = stream_context_create($options);
+      $query = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/' . $this->id .'?api_key=e3c790bdb811cade513e875f4806841d&language=ru', false, $context), true);
+
+      $runtime = $query['runtime'];
+
+      $this->runtime = $runtime;
+      
+     }
   }
-}

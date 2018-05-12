@@ -9,7 +9,7 @@
     {
       $films = [];
       foreach ($filmsArray as $film) {
-        array_push($films, new Film ($film['title'], $film['titleOriginal'], $film['poster'], $film['overview'], $film['releaseDate'], $film['genres']));
+        array_push($films, new Film ($film['id'], $film['title'], $film['titleOriginal'], $film['poster'], $film['overview'], $film['releaseDate'], $film['genres'], $film['runtime']));
       }
       return $films;
     }
@@ -22,6 +22,7 @@
         array_push($this->films, new Film ($films[$i]['id'], $films[$i]['title'], $films[$i]['original_title'], $films[$i]['poster_path'], $films[$i]['overview'], $films[$i]['release_date'], $films[$i]['genre_ids']));
         $this->films[$i]->setGenres($genres);
         $this->films[$i]->getPoster($i);
+        $this->films[$i]->getRuntime();
       }
     }
 

@@ -11,7 +11,8 @@
     poster TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     overview TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     releaseDate DATE NOT NULL ,
-    genres TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+    genres TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+    runtime INT
   )";
 
   $db_con = mysqli_connect($db_location, $db_user, $db_pass, $db_name);
