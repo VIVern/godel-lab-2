@@ -1,16 +1,17 @@
 <?php
   require_once './config/config.php';
   include_once './classes/Logger.php';
-  $log = fopen('logs/log.txt', 'a');
 
   $query = "CREATE TABLE films (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    filmId INT,
     title TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     titleOriginal TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     poster TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     overview TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     releaseDate DATE NOT NULL ,
-    genres TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+    genres TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+    runtime INT
   )";
 
   $db_con = mysqli_connect($db_location, $db_user, $db_pass, $db_name);
@@ -18,6 +19,7 @@
 
   $query = "CREATE TABLE shows (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    showId INT,
     name TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     originalName TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
     poster TINYTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
@@ -37,6 +39,6 @@
     Logger::writeMessage("Failed to create table. Check Mysql querry in deploy.php file");
     exit("Warning: check log file for more information\n");
   } else {
-    Logger::writeMessage("Table was created successfully");
+    Logger::writeMessage("Tables was created successfully");
     echo "operation complite\n";
   }

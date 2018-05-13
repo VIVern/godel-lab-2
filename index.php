@@ -8,24 +8,22 @@
 
   if (isset($argv) === true || $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($argv) === true || (isset($_POST['mod']) === true && $_POST['mod'] === 'Query')) {
-
       if (isset($argv) === true) {
         echo "geting data from tmdb \n";
       }
 
       // gettin films from tmdb and pushing to data base
-      $app->request->getData();
-      $app->film->parseFilms($app->request->response, $app->request->genre);
+      $app->film->requestFilms($API_token);
       $app->db->setData($app->film->films, 'films');
 
       // gettin shows from tmdb and pushing to data base
-      $app->request->getShows();
-      $app->show->parseShows($app->request->response, $app->request->genre);
+      $app->show->requestShows($API_token);
       $app->db->setData($app->show->shows, 'shows');
 
       if (isset($argv) === true) {
         echo "data was updated succesfuly \n";
       } else {
+        //showing success message
         $app->view->showStaticPage('./view/succes.html');
       }
     } elseif ((isset($_POST['mod']) === true && $_POST['mod'] === 'List') || isset($_POST['films']) === true) {
