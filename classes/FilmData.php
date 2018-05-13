@@ -41,6 +41,12 @@
 
       $request = new Request();
       $request->getData($url);
+
+      if ($request->response['results'] === 0) {
+        Logger::writeMessage("Failed to get data via " . $url . " request");
+      } else {
+        Logger::writeMessage("Data via " . $url . " recived successfully");
+      }
       $response = $request->response['results'];
 
       if ( $pages === 0) {
@@ -54,11 +60,16 @@
           ];
           $url = 'https://api.themoviedb.org/3/movie/now_playing?' . http_build_query($options);
           $request->getData($url);
+          if ($request->response['results'] === 0) {
+            Logger::writeMessage("Failed to get data via " . $url . " request");
+          } else {
+            Logger::writeMessage("Data via " . $url . " recived successfully");
+          }
           $response = array_merge($response, $request->response['results']);
         }
       }
       $this->parseFilmsResponse($response);
-      $this->requestFilmDetails($this->films);
+      $this->requestFilmDetails($this->films, $API_token, $language);
     }
 
     private function parseFilmsResponse($filmsArray)
@@ -76,26 +87,33 @@
       }
     }
 
-    private function requestFilmDetails($filmArray)
+    private function requestFilmDetails($filmArray, $API_token, $language)
     {
 
       if (file_exists('./uploads/films/') === true) {
         foreach (glob('./uploads/films/*') as $file) {
           unlink($file);
         }
-        //Logger::writeMessage("Uploads/shows folder was cleared");
+        Logger::writeMessage("Uploads/films folder was cleared");
       }
 
       foreach ($filmArray as $film)
       {
         $options = [
-          'api_key' => 'e3c790bdb811cade513e875f4806841d',
-          'language' => 'ru',
+          'api_key' => $API_token,
+          'language' => $language
         ];
 
         $url = 'https://api.themoviedb.org/3/movie/' . $film->id . '?' . http_build_query($options);
         $request = new Request();
         $request->getData($url);
+
+        if (isset($request->response['status_code']) === true) {
+          Logger::writeMessage("Failed to get film details via " . $url . " request");
+        } else {
+          Logger::writeMessage("Film details via " . $url . " recived successfully");
+        }
+
         $details = $request->response;
         if ($details['runtime'] !== null) {
           $film->runtime = $details['runtime'];
@@ -113,11 +131,11 @@
           $path = './uploads/films/film_' . $film->id . '.jpg';
           $poster = file_get_contents($url);
 
-          // if ($path === false) {
-          //   Logger::writeMessage("Failed to download poster from tmdb. Check tmdb server status and request url");
-          // } else {
-          //   Logger::writeMessage("Poster was received successfully");
-          // }
+          if ($path === false) {
+            Logger::writeMessage("Failed to download poster from tmdb. Check tmdb server status and request url");
+          } else {
+            Logger::writeMessage("Poster was received successfully");
+          }
 
           file_put_contents($path, $poster);
           $film->poster = $path;

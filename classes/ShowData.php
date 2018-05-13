@@ -35,10 +35,17 @@
 
       $request = new Request();
       $request->getData($url);
+
+      if ($request->response['results'] === 0) {
+        Logger::writeMessage("Failed to get data via " . $url . " request");
+      } else {
+        Logger::writeMessage("Data via " . $url . " recived successfully");
+      }
+
       $response = $request->response['results'];
 
       $this->parseShowsResponse($response);
-      $this->requestShowDetails($this->shows);
+      $this->requestShowDetails($this->shows, $API_token, $language);
     }
 
     private function parseShowsResponse($showsArray)
@@ -56,26 +63,33 @@
       }
     }
 
-    private function requestShowDetails($showsArray)
+    private function requestShowDetails($showsArray, $API_token, $language)
     {
 
       if (file_exists('./uploads/shows/') === true) {
         foreach (glob('./uploads/shows/*') as $file) {
           unlink($file);
         }
-        //Logger::writeMessage("Uploads/shows folder was cleared");
+        Logger::writeMessage("Uploads/shows folder was cleared");
       }
 
       foreach ($showsArray as $show)
       {
         $options = [
-          'api_key' => 'e3c790bdb811cade513e875f4806841d',
-          'language' => 'ru',
+          'api_key' => $API_token,
+          'language' => $language,
         ];
 
         $url = 'https://api.themoviedb.org/3/tv/' . $show->id . '?' . http_build_query($options);
         $request = new Request();
         $request->getData($url);
+
+        if (isset($request->response['status_code']) === true) {
+          Logger::writeMessage("Failed to get show details via " . $url . " request");
+        } else {
+          Logger::writeMessage("Show details via " . $url . " recived successfully");
+        }
+
         $details = $request->response;
 
         foreach ($details['genres'] as $genre)
@@ -88,11 +102,11 @@
           $path = './uploads/shows/show_' . $show->id . '.jpg';
           $poster = file_get_contents($url);
 
-          // if ($path === false) {
-          //   Logger::writeMessage("Failed to download poster from tmdb. Check tmdb server status and request url");
-          // } else {
-          //   Logger::writeMessage("Poster was received successfully");
-          // }
+          if ($path === false) {
+            Logger::writeMessage("Failed to download poster from tmdb. Check tmdb server status and request url");
+          } else {
+            Logger::writeMessage("Poster was received successfully");
+          }
 
           file_put_contents($path, $poster);
           $show->poster = $path;
