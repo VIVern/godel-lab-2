@@ -1,7 +1,6 @@
 <?php
   require_once './config/config.php';
   include_once './classes/Logger.php';
-  $log = fopen('logs/log.txt', 'a');
 
   $query = "CREATE TABLE films (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -40,6 +39,6 @@
     Logger::writeMessage("Failed to create table. Check Mysql querry in deploy.php file");
     exit("Warning: check log file for more information\n");
   } else {
-    Logger::writeMessage("Table was created successfully");
+    Logger::writeMessage("Tables was created successfully");
     echo "operation complite\n";
   }

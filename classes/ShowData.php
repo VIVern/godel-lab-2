@@ -9,6 +9,7 @@
     public function createShowUnits($showsArray)
     {
       $shows = [];
+
       foreach ($showsArray as $show) {
         array_push($shows, new Unit (
           $show['id'],
@@ -20,19 +21,18 @@
           $show['genres']
         ));
       }
+
       return $shows;
     }
 
     public function requestShows($API_token, $language = 'ru')
     {
-
       $options = [
         'api_key' => $API_token,
         'language' => $language,
       ];
 
       $url = 'https://api.themoviedb.org/3/tv/popular?' . http_build_query($options);
-
       $request = new Request();
       $request->getData($url);
 
@@ -50,8 +50,7 @@
 
     private function parseShowsResponse($showsArray)
     {
-      foreach ($showsArray as $show)
-      {
+      foreach ($showsArray as $show) {
         array_push($this->shows, new Unit (
           $show['id'],
           $show['name'],
@@ -65,16 +64,15 @@
 
     private function requestShowDetails($showsArray, $API_token, $language)
     {
-
       if (file_exists('./uploads/shows/') === true) {
         foreach (glob('./uploads/shows/*') as $file) {
           unlink($file);
         }
+
         Logger::writeMessage("Uploads/shows folder was cleared");
       }
 
-      foreach ($showsArray as $show)
-      {
+      foreach ($showsArray as $show) {
         $options = [
           'api_key' => $API_token,
           'language' => $language,
@@ -92,8 +90,7 @@
 
         $details = $request->response;
 
-        foreach ($details['genres'] as $genre)
-        {
+        foreach ($details['genres'] as $genre) {
           $show->genres .=$genre['name'] . ",";
         }
 

@@ -28,23 +28,25 @@
       } else {
         Logger::writeMessage("Connected to database successfully");
       }
+
       return $this->db_con;
     }
 
     public function setData($data, $table)
     {
       $this->connect();
-
       $this->removeData($table);
 
       foreach ($data as $film) {
         $vars = get_object_vars($film);
         $values = "( NULL";
+
         foreach ($vars as $var => $value) {
           if ($value !== NULL) {
             $values .= ", '" . $value . "'";
           }
         }
+
         $querry = "INSERT INTO " . $table . " VALUES " . $values . ")";
         $req = mysqli_query($this->db_con, $querry);
 
@@ -60,6 +62,7 @@
     public function getData($table)
     {
       $this->connect();
+
       //select from database
       $querry = "SELECT * FROM " . $table;
       $req = mysqli_query($this->db_con, $querry);
@@ -72,15 +75,18 @@
       }
 
       $responseData = [];
+
       while ($result = mysqli_fetch_array($req)) {
         array_push($responseData, $result);
       }
+
       return $responseData;
     }
 
     public function removeData($table)
     {
       $this->connect();
+
       $querry = "DELETE FROM " . $table;
       $req = mysqli_query($this->db_con, $querry);
 

@@ -123,3 +123,7 @@ ul {
   color: #fff;
   text-align: center;
 }
+
+input[name="shows"], input[name="films"] {
+  margin-top: 17px;
+}

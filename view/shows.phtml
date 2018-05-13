@@ -27,8 +27,8 @@
         foreach ($data as $show) {
       ?>
       <div class="filmCard">
-        <h2><?php echo $show->name ?></h2>
-        <h3>(<?php echo $show->originalName ?>)</h3>
+        <h2><?php echo $show->title ?></h2>
+        <h3>(<?php echo $show->titleOriginal ?>)</h3>
         <img src="<?php echo $show->poster ?>" alt="">
         <p><?php echo $show->overview ?></p>
         <h3 class="genre">Жанры:</h3>

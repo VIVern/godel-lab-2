@@ -38,7 +38,6 @@
       ];
 
       $url = 'https://api.themoviedb.org/3/movie/now_playing?' . http_build_query($options);
-
       $request = new Request();
       $request->getData($url);
 
@@ -47,35 +46,38 @@
       } else {
         Logger::writeMessage("Data via " . $url . " recived successfully");
       }
+
       $response = $request->response['results'];
 
       if ( $pages === 0) {
-        for($i = 2; $i <= $request->response['total_pages']; $i++)
-        {
+        for ($i = 2; $i <= $request->response['total_pages']; $i++) {
           $options = [
             'api_key' => $API_token,
             'language' => $language,
             'region' => $region,
             'page' => $i
           ];
+
           $url = 'https://api.themoviedb.org/3/movie/now_playing?' . http_build_query($options);
           $request->getData($url);
+
           if ($request->response['results'] === 0) {
             Logger::writeMessage("Failed to get data via " . $url . " request");
           } else {
             Logger::writeMessage("Data via " . $url . " recived successfully");
           }
+
           $response = array_merge($response, $request->response['results']);
         }
       }
+
       $this->parseFilmsResponse($response);
       $this->requestFilmDetails($this->films, $API_token, $language);
     }
 
     private function parseFilmsResponse($filmsArray)
     {
-      foreach ($filmsArray as $film)
-      {
+      foreach ($filmsArray as $film) {
         array_push($this->films, new Unit (
           $film['id'],
           $film['title'],
@@ -89,7 +91,6 @@
 
     private function requestFilmDetails($filmArray, $API_token, $language)
     {
-
       if (file_exists('./uploads/films/') === true) {
         foreach (glob('./uploads/films/*') as $file) {
           unlink($file);
@@ -97,8 +98,7 @@
         Logger::writeMessage("Uploads/films folder was cleared");
       }
 
-      foreach ($filmArray as $film)
-      {
+      foreach ($filmArray as $film) {
         $options = [
           'api_key' => $API_token,
           'language' => $language
@@ -115,14 +115,14 @@
         }
 
         $details = $request->response;
+
         if ($details['runtime'] !== null) {
           $film->runtime = $details['runtime'];
         } else {
           $film->runtime = 0;
         }
 
-        foreach ($details['genres'] as $genre)
-        {
+        foreach ($details['genres'] as $genre) {
           $film->genres .=$genre['name'] . ",";
         }
 
