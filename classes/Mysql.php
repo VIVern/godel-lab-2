@@ -43,7 +43,7 @@
         foreach ($vars as $var => $value) {
           if ($value !== NULL) {
             $values .= ", '" . $value . "'";
-          } 
+          }
         }
         $querry = "INSERT INTO " . $table . " VALUES " . $values . ")";
         $req = mysqli_query($this->db_con, $querry);
@@ -92,7 +92,7 @@
       }
     }
 
-    public function updateData()
+    public function updateData($table)
     {
       throw new Exception("not implemented");
     }

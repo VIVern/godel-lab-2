@@ -5,5 +5,5 @@
     abstract public function setData($data, $table);
     abstract public function getData($table);
     abstract public function removeData($table);
-    abstract public function updateData();
+    abstract public function updateData($table);
   }
